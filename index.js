@@ -1,5 +1,6 @@
 const express = require('express');
-const hbs     = require('hbs')
+const hbs     = require('hbs');
+require('dotenv').config();
 
 /* Inicializo app */
 const app = express();
@@ -37,7 +38,7 @@ app.get("*", (req,res) =>{
 })
 
 
-const port = 3000
+const port = process.env.PORT
 app.listen(port, ()=>{
     console.log(`Servidor iniciado en el puerto ${port}`)
 })
