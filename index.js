@@ -1,11 +1,12 @@
-const express = require('express')
+const express = require('express');
+const hbs     = require('hbs')
 
 /* Inicializo app */
 const app = express();
 
 //Handlebars
 app.set('view engine', 'hbs');
-
+hbs.registerPartials(__dirname + '/views/partials')
 
 /* Carpeta pública */
 app.use(express.static('public'))
@@ -15,20 +16,24 @@ app.get('/',(req,res) =>{
     res.render('home', {
         nombre: 'Jesús Farias',
         titulo: 'Aprendo Node'
-    });
+    })
 })
 
 app.get('/generic', (req,res) =>{
-    res.sendFile(__dirname + '/public/generic.html')
+    res.render('generic',{
+        titulo: 'Generic'
+    })
 }) 
 
 app.get('/elements', (req,res) =>{
-    res.sendFile(__dirname + '/public/elements.html')
+    res.render('elements', {
+        titulo: 'Elements'
+    })
 }) 
 
 
 app.get("*", (req,res) =>{
-    res.sendFile(__dirname + '/public/404.html')
+    res.render('404')
 })
 
 
